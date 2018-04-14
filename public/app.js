@@ -12,7 +12,7 @@ const makeRequest = function(url, callback){
   request.addEventListener("load", callback);
   request.send();
   request.addEventListener('load', function() {
-    loadPieCharts(request.responseText);
+    loadColumnChart(request.responseText);
   });
 };
 
@@ -77,57 +77,63 @@ const clearContent = function(node){
 }
 
 
-
-
-// window.addEventListener('load', app);
-
-///////
-
-// request.addEventListener('load', function() {
-//   loadPieCharts(request.responseText);
-// });
-
-// });
-
-
-
-var loadPieCharts = function(responseText) {
+var loadColumnChart = function(responseText) {
   var chars = JSON.parse(responseText);
 
-  houseData = [];
+
+  var characterHouseData = {
+    name: "Number of students",
+    data: [],
+    color:  "#ff6f69"
+  };
+
+  var characterHouseLabels = [];
+
 
   for(char of chars) {
-    houseData.push({
-      name: char.name,
-      // y: char.house,
-    });
+    if(!characterHouseLabels.includes(char.house)) {
+      characterHouseLabels.push(char.house);
+    }
   }
 
-  // var countryRegionData = {
-  //   name: "Number of Countries",
-  //   data: []
-  // };
-  //
-  // var countryRegionLabels = [];
-  //
-  // for(country of countries) {
-  //   if(!countryRegionLabels.includes(country.region)) {
-  //     countryRegionLabels.push(country.region);
-  //   }
-  // }
-  //
-  // for(label of countryRegionLabels) {
-  //   var num = 0;
-  //   for(country of countries) {
-  //     if(country.region == label) {
-  //       num ++;
-  //     }
-  //   }
-  //   countryRegionData.data.push(num);
-  // }
+  for(label of characterHouseLabels) {
+    var num = 0;
+    for(char of chars) {
+      if(char.house == label) {
+        num ++;
+      }
+    }
+    characterHouseData.data.push(num);
+  }
 
-  new PieChart("House data", houseData);
-
+new ColumnChart("House numbers", characterHouseData, characterHouseLabels);
 };
 
 window.addEventListener('load', app);
+
+/////
+
+window.addEventListener('DOMContentLoaded', function(){
+  const canvas = document.querySelector('#main-canvas');
+  const context = canvas.getContext('2d');
+
+
+  const drawCircle = function(x,y){
+  context.beginPath();
+  // context.moveTo(x, y);
+  context.arc(x, y, 60, 0, Math.PI*2, true);
+  context.stroke();
+  }
+
+  canvas.addEventListener('mousemove', function(event){
+    drawCircle(event.x, event.y);
+  })
+
+  const changeColour = function(){
+    context.strokeStyle = this.value;
+  }
+
+  const colourPicker = document.querySelector('#input-colour');
+  colourPicker.addEventListener('change', changeColour)
+
+  })

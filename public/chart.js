@@ -1,20 +1,21 @@
-var PieChart = function(title, data) {
 
-  var container = document.getElementById("pieChart");
+var ColumnChart = function(title, data, categories) {
 
-  var chart = new Highcharts.Chart({
-    chart: {
-      type: 'pie',
-      renderTo: container
-    },
-    title: {
-      text: title
-    },
-    series: [
-      {
-        data: data
-      }
-    ]
-  });
+  var container = document.getElementById("columnChart");
+
+    var chart = new Highcharts.Chart({
+      chart: {
+        type: 'column',
+        renderTo: container
+      },
+      title: {
+        text: title
+      },
+      series: [data],
+          xAxis: {
+            categories: categories
+
+          },
+    });
 
 };
