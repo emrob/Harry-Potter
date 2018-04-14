@@ -93,8 +93,10 @@ var loadColumnChart = function(responseText) {
 
 
   for(char of chars) {
+    if(char.hogwartsStudent === true){
     if(!characterHouseLabels.includes(char.house)) {
       characterHouseLabels.push(char.house);
+    }
     }
   }
 
