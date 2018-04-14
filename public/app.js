@@ -114,48 +114,15 @@ window.addEventListener('load', app);
 
 /////
 
-// window.addEventListener('DOMContentLoaded', function(){
-//   const canvas = document.querySelector('#main-canvas');
-//   const context = canvas.getContext('2d');
-//
-//
-//   const drawCircle = function(x,y){
-//   context.beginPath();
-//   // context.moveTo(x, y);
-//   context.arc(x, y, 60, 0, Math.PI*2, true);
-//   context.stroke();
-//   }
-//
-//   canvas.addEventListener('mousemove', function(event){
-//     drawCircle(event.x, event.y);
-//   })
-//
-//   const changeColour = function(){
-//     context.strokeStyle = this.value;
-//
-//   }
-//
-//   const colourPicker = document.querySelector('#input-colour');
-//   colourPicker.addEventListener('change', changeColour)
-//
-//
-//   })
 
-  ////
 
 var img = new Image();
-
-// User Variables - customize these to change the image being scrolled, its
-// direction, and the speed.
-
 img.src = 'http://wallfocus.com/cache/images/b/f/3/4/0/bf340650c27b44af6ea2d8014169777e59ecad94.png';
 var CanvasXSize = 800;
-var CanvasYSize = 200;
-var speed = 30; // lower is faster
+var CanvasYSize = 600;
+var speed = 50; // lower is faster
 var scale = 1.05;
 var y = -4.5; // vertical offset
-
-// Main program
 
 var dx = 0.75;
 var imgW;
@@ -228,3 +195,29 @@ function draw() {
     // amount to move
     x += dx;
 }
+
+/////
+
+
+window.addEventListener('DOMContentLoaded', function(){
+  const drawCanvas = document.querySelector('#draw-canvas');
+  const context = drawCanvas.getContext('2d');
+
+  const drawCircle = function(x,y){ß
+  context.beginPath();
+  context.arc(x, y, 60, 0, Math.PI*2, true);
+  context.stroke();
+  }
+
+  drawCanvas.addEventListener('mousemove', function(event){
+  drawCircle(event.x, event.y);
+  })
+
+  const changeColour = function(){
+  context.strokeStyle = this.value;
+  }
+
+  const colourPicker = document.querySelector('#input-colour');
+  colourPicker.addEventListener('change', changeColour)
+
+  })
