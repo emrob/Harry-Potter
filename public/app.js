@@ -77,6 +77,7 @@ const clearContent = function(node){
   }
 }
 
+///
 
 var loadColumnChart = function(responseText) {
   var chars = JSON.parse(responseText);
@@ -107,7 +108,7 @@ var loadColumnChart = function(responseText) {
     characterHouseData.data.push(num);
   }
 
-new ColumnChart("House numbers", characterHouseData, characterHouseLabels);
+new ColumnChart("Number of Students per House", characterHouseData, characterHouseLabels);
 };
 
 window.addEventListener('load', app);
@@ -199,25 +200,51 @@ function draw() {
 /////
 
 
-window.addEventListener('DOMContentLoaded', function(){
-  const drawCanvas = document.querySelector('#draw-canvas');
-  const context = drawCanvas.getContext('2d');
+// window.addEventListener('DOMContentLoaded', function(){
+//   const drawCanvas = document.querySelector('#draw-canvas');
+//   const context = drawCanvas.getContext('2d');
+//
+//   const drawCircle = function(x,y){
+//   context.beginPath();
+//   context.arc(x, y, 60, 0, Math.PI*2, true);
+//   context.stroke();
+//   }
+//
+//   drawCanvas.addEventListener('mousemove', function(event){
+//   drawCircle(event.x, event.y);
+//   })
+//
+//   const changeColour = function(){
+//   context.strokeStyle = this.value;
+//   }
+//
+//   const colourPicker = document.querySelector('#input-colour');
+//   colourPicker.addEventListener('change', changeColour)
+//
+//   })
 
-  const drawCircle = function(x,y){ß
-  context.beginPath();
-  context.arc(x, y, 60, 0, Math.PI*2, true);
-  context.stroke();
-  }
+  ////
 
-  drawCanvas.addEventListener('mousemove', function(event){
-  drawCircle(event.x, event.y);
-  })
+  const initialize = function(){
 
-  const changeColour = function(){
-  context.strokeStyle = this.value;
-  }
+  const container = document.getElementById('main-map');
+  const center = {lat:51.6904164, lng: -0.4197687}
+  const hagrid = {lat:56.6675343, lng: -5.0623299}
+  const hogwarts = {lat:55.1010664, lng: -1.7059204}
 
-  const colourPicker = document.querySelector('#input-colour');
-  colourPicker.addEventListener('change', changeColour)
+  const zoom = 5;
 
-  })
+
+
+  const mainMap = new MapWrapper(container, center, zoom);
+
+  const marker = mainMap.addMarker(center);
+  mainMap.addInfoWindow(marker, "<h4>Harry's House<h4><h4>4 Privet Drive<h4>");
+  const secondMarker = mainMap.addMarker(hagrid);
+  mainMap.addInfoWindow(secondMarker, "<h4>Hagrid's Hut<h4><h4>Ballachulish PH49 4HX<h4>");
+
+  const thirdMarker = mainMap.addMarker(hogwarts);
+  mainMap.addInfoWindow(thirdMarker, "<h4>Hogwarts<h4><h4>Alnwick Castle, NE66 1NQ<h4>");
+
+}
+  window.addEventListener('DOMContentLoaded', initialize)

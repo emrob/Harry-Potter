@@ -4,27 +4,32 @@
     <title>Harry Potter</title>
     <!-- <h1>Harry Potter</h1> -->
     <link rel="stylesheet" href="style.css">
-
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src='app.js'></script>
     <script src="chart.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="mapWrapper.js"></script>
   </head>
+
   <body>
     <canvas id="main-canvas" width="800" height="600"></canvas>
 
-    <h1>Data:</h1>
-    <div id="columnChart" width="200" height="300"></div>
+
 
     <h1>Character Profiles:</h1>
     <h3>Select a character: <h3><select id='char-list'></select>
     <div id="char-details"></div>
 
-    <h1>Practice your spells...</h1>
+    <h2></div>Data:</h2>
+    <div id="columnChart" width="300" height="400"></div>
+    <!-- <h1>Practice your spells...</h1>
     <canvas class="draw" id="draw-canvas" width="600" height="400"></canvas>
-    <script type="text/javascript">
+    <input type="color" id="input-colour"></input> -->
 
-    </script>
-    <input type="color" id="input-colour"></input>
+  <h2>Click below to find Harry Potter related locations:</h2>
+   <div id="main-map"></div>
+   <div id="map"></div>
 
   </body>
+
 </html>

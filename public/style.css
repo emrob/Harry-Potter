@@ -3,15 +3,25 @@ img {
 }
 
 body {
+
   /* margin: 0; */
-  /* background-color: maroon; */
+  background-color: maroon;
   /* background-size: cover; */
 }
 
 h1 {
   font-family: cursive;
   font-size: 50px;
+  color: white;
   text-align: center;
+
+}
+
+h2 {
+  font-family: cursive;
+  font-size: 40px;
+  color: white;
+
 
 }
 
@@ -27,11 +37,26 @@ canvas {
   background-color: black;
   margin-right: auto;
 }
-/*
-body {
-  background: #E3E9F2 url('/images/dog.jpg') no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-attachment: fixed;
 
-} */
+
+#columnChart {
+  border: 10px solid black;
+}
+
+#main-map {
+  height: 800px;
+  width: 700px;
+  border: 10px solid black;
+  background-position: center;
+}
+
+
+
+select {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  color: white;
+}
