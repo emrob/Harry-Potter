@@ -57,11 +57,12 @@ const charDetails = function (char) {
   charHouse.innerText = `House: ${char.house}`
   const charPhoto = document.createElement('img')
   charPhoto.src = char.image
+  div.appendChild(charPhoto)
   div.appendChild(charName)
   div.appendChild(charGender)
   div.appendChild(charSpecies)
   div.appendChild(charHouse)
-  div.appendChild(charPhoto)
+
   return div
 }
 
@@ -113,27 +114,117 @@ window.addEventListener('load', app);
 
 /////
 
-window.addEventListener('DOMContentLoaded', function(){
-  const canvas = document.querySelector('#main-canvas');
-  const context = canvas.getContext('2d');
+// window.addEventListener('DOMContentLoaded', function(){
+//   const canvas = document.querySelector('#main-canvas');
+//   const context = canvas.getContext('2d');
+//
+//
+//   const drawCircle = function(x,y){
+//   context.beginPath();
+//   // context.moveTo(x, y);
+//   context.arc(x, y, 60, 0, Math.PI*2, true);
+//   context.stroke();
+//   }
+//
+//   canvas.addEventListener('mousemove', function(event){
+//     drawCircle(event.x, event.y);
+//   })
+//
+//   const changeColour = function(){
+//     context.strokeStyle = this.value;
+//
+//   }
+//
+//   const colourPicker = document.querySelector('#input-colour');
+//   colourPicker.addEventListener('change', changeColour)
+//
+//
+//   })
 
+  ////
 
-  const drawCircle = function(x,y){
-  context.beginPath();
-  // context.moveTo(x, y);
-  context.arc(x, y, 60, 0, Math.PI*2, true);
-  context.stroke();
-  }
+var img = new Image();
 
-  canvas.addEventListener('mousemove', function(event){
-    drawCircle(event.x, event.y);
-  })
+// User Variables - customize these to change the image being scrolled, its
+// direction, and the speed.
 
-  const changeColour = function(){
-    context.strokeStyle = this.value;
-  }
+img.src = 'http://wallfocus.com/cache/images/b/f/3/4/0/bf340650c27b44af6ea2d8014169777e59ecad94.png';
+var CanvasXSize = 800;
+var CanvasYSize = 200;
+var speed = 30; // lower is faster
+var scale = 1.05;
+var y = -4.5; // vertical offset
 
-  const colourPicker = document.querySelector('#input-colour');
-  colourPicker.addEventListener('change', changeColour)
+// Main program
 
-  })
+var dx = 0.75;
+var imgW;
+var imgH;
+var x = 0;
+var clearX;
+var clearY;
+var ctx;
+
+img.onload = function() {
+    imgW = img.width * scale;
+    imgH = img.height * scale;
+
+    if (imgW > CanvasXSize) {
+        // image larger than canvas
+        x = CanvasXSize - imgW;
+    }
+    if (imgW > CanvasXSize) {
+        // image width larger than canvas
+        clearX = imgW;
+    } else {
+        clearX = CanvasXSize;
+    }
+    if (imgH > CanvasYSize) {
+        // image height larger than canvas
+        clearY = imgH;
+    } else {
+        clearY = CanvasYSize;
+    }
+
+    // get canvas context
+    ctx = document.getElementById('main-canvas').getContext('2d');
+
+    // set refresh rate
+    return setInterval(draw, speed);
+}
+
+function draw() {
+    ctx.clearRect(0, 0, clearX, clearY); // clear the canvas
+
+    // if image is <= Canvas Size
+    if (imgW <= CanvasXSize) {
+        // reset, start from beginning
+        if (x > CanvasXSize) {
+            x = -imgW + x;
+        }
+        // draw additional image1
+        if (x > 0) {
+            ctx.drawImage(img, -imgW + x, y, imgW, imgH);
+        }
+        // draw additional image2
+        if (x - imgW > 0) {
+            ctx.drawImage(img, -imgW * 2 + x, y, imgW, imgH);
+        }
+    }
+
+    // image is > Canvas Size
+    else {
+        // reset, start from beginning
+        if (x > (CanvasXSize)) {
+            x = CanvasXSize - imgW;
+        }
+        // draw aditional image
+        if (x > (CanvasXSize-imgW)) {
+            ctx.drawImage(img, x - imgW + 1, y, imgW, imgH);
+        }
+    }
+    // draw image
+    ctx.drawImage(img, x, y,imgW, imgH);
+    // amount to move
+    x += dx;
+}
