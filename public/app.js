@@ -233,6 +233,7 @@ function draw() {
   const center = {lat:51.6904164, lng: -0.4197687}
   const hagrid = {lat:56.6675343, lng: -5.0623299}
   const hogwarts = {lat:55.1010664, lng: -1.7059204}
+  const usa = {lat:28.4793144, lng: -81.472527}
 
   const zoom = 5;
 
@@ -241,12 +242,23 @@ function draw() {
   const mainMap = new MapWrapper(container, center, zoom);
 
   const marker = mainMap.addMarker(center);
-  mainMap.addInfoWindow(marker, "<h4>Harry's House<h4><h4>4 Privet Drive<h4>");
+  mainMap.addInfoWindow(marker, "<img src= harrysHouse.jpg><h4>Harry's House<h4><h4>4 Privet Drive<h4>");
   const secondMarker = mainMap.addMarker(hagrid);
-  mainMap.addInfoWindow(secondMarker, "<h4>Hagrid's Hut<h4><h4>Ballachulish PH49 4HX<h4>");
+  mainMap.addInfoWindow(secondMarker, "<img src= hagridshut.jpg><h4>Hagrid's Hut<h4><h4>Ballachulish PH49 4HX<h4>");
 
   const thirdMarker = mainMap.addMarker(hogwarts);
-  mainMap.addInfoWindow(thirdMarker, "<h4>Hogwarts<h4><h4>Alnwick Castle, NE66 1NQ<h4>");
+  mainMap.addInfoWindow(thirdMarker, "<img src= castle.jpg><h4>Hogwarts<h4><h4>Alnwick Castle, NE66 1NQ<h4>");
+
+  const usaMarker = mainMap.addMarker(usa);
+  mainMap.addInfoWindow(usaMarker, "<img src= hpworld.jpg></img><h4>Harry Potter World");
+
+
+  const usaButton = document.getElementById("usa");
+  usaButton.addEventListener("click", function(){
+  const usaLatLng = {lat:28.4793144, lng: -81.472527};
+  mainMap.goToPlace(usaLatLng);
+  });
+
 
 }
   window.addEventListener('DOMContentLoaded', initialize)
